@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "HS_uglyBob")(type "KiCad")(uri "${KIPRJMOD}/HS_uglyBob.kicad_sym")(options "")(descr ""))
+)

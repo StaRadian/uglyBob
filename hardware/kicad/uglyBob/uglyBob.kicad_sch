@@ -1,0 +1,99 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 83be3be3-462a-4719-841d-63c3992c51ca)
+
+  (paper "A4")
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 36.83 104.14) (size 30.48 27.94) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 125330f9-2efa-48d4-bf4d-0ab6223ec40a)
+    (property "Sheetname" "Microcontoroller" (at 36.83 103.4284 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "microcontoroller.kicad_sch" (at 36.83 132.6646 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "uglyBob"
+        (path "/83be3be3-462a-4719-841d-63c3992c51ca" (page "3"))
+      )
+    )
+  )
+
+  (sheet (at 119.38 143.51) (size 30.48 27.94) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 13d76ea1-a961-4683-b7a8-428edd49df03)
+    (property "Sheetname" "Interface" (at 119.38 142.7984 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "interface.kicad_sch" (at 119.38 172.0346 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "uglyBob"
+        (path "/83be3be3-462a-4719-841d-63c3992c51ca" (page "6"))
+      )
+    )
+  )
+
+  (sheet (at 36.83 64.77) (size 30.48 27.94) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 50cf3020-a48a-4bf4-b2d8-d22571582d51)
+    (property "Sheetname" "Power" (at 36.83 64.0584 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "power.kicad_sch" (at 36.83 93.2946 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "uglyBob"
+        (path "/83be3be3-462a-4719-841d-63c3992c51ca" (page "2"))
+      )
+    )
+  )
+
+  (sheet (at 36.83 143.51) (size 30.48 27.94) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 8bddaff5-7fea-480c-bc16-5d75d115df1b)
+    (property "Sheetname" "Sensor" (at 36.83 142.7984 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "sensor.kicad_sch" (at 36.83 172.0346 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "uglyBob"
+        (path "/83be3be3-462a-4719-841d-63c3992c51ca" (page "4"))
+      )
+    )
+  )
+
+  (sheet (at 78.74 143.51) (size 30.48 27.94) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid eede91a6-6b44-4c2e-b78c-6da2ff8ad7d1)
+    (property "Sheetname" "Motor" (at 78.74 142.7984 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "motor.kicad_sch" (at 78.74 172.0346 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "uglyBob"
+        (path "/83be3be3-462a-4719-841d-63c3992c51ca" (page "5"))
+      )
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)
