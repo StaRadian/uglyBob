@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "uglyEncoder_HS")(type "KiCad")(uri "${KIPRJMOD}/uglyEncoder_HS.pretty")(options "")(descr ""))
+)
