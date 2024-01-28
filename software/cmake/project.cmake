@@ -65,16 +65,20 @@ target_link_options(
     "$<$<NOT:$<CONFIG:Debug>>:-mfpu=fpv4-sp-d16>"
     "$<$<NOT:$<CONFIG:Debug>>:-mfloat-abi=hard>"
     -T
-    "$<$<CONFIG:Debug>:${PROJECT_SOURCE_DIR}/include/STM32G474VETX_FLASH.ld>"
-    "$<$<NOT:$<CONFIG:Debug>>:${PROJECT_SOURCE_DIR}/include/STM32G474VETX_FLASH.ld>"
+    "$<$<CONFIG:Debug>:${PROJECT_SOURCE_DIR}/include/STM32G474CETx_FLASH.ld>"
+    "$<$<NOT:$<CONFIG:Debug>>:${PROJECT_SOURCE_DIR}/include/STM32G474CETx_FLASH.ld>"
 )
 
 target_sources(
     ${TARGET_NAME} PRIVATE
-    "src/Core/Main.cpp"
+    "src/Core/Device.cpp"
     "src/Core/IRQHandler.cpp"
+    "src/Core/Main.cpp"
     "src/Interface/HCMSDisplay.cpp"
-    "src/Interface/UartPrint.cpp"
+    "src/Sensor/Encoder.cpp"
+    "src/Sensor/ICM42688V.cpp"
+    "src/Sensor/IRSensor.cpp"
+    "src/UI/Menu.cpp"
     
     "include/startup_stm32g474xx.s"
     "include/Core/Src/adc.c"
@@ -82,11 +86,10 @@ target_sources(
     "include/Core/Src/hrtim.c"
     "include/Core/Src/i2c.c"
     "include/Core/Src/opamp.c"
-    "include/Core/Src/spi.c"
     "include/Core/Src/stm32g4xx_hal_msp.c"
     "include/Core/Src/stm32g4xx_it.c"
     "include/Core/Src/system_stm32g4xx.c"
-    "include/Core/Src/usart.c"
+    "include/Core/Src/tim.c"
     "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc_ex.c"
     "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_adc.c"
     "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c"
@@ -106,12 +109,8 @@ target_sources(
     "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c"
     "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c"
     "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c"
-    "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi_ex.c"
-    "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_spi.c"
     "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c"
     "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c"
-    "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c"
-    "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c"
     "include/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c"
 )
 

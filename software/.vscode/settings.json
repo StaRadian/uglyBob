@@ -56,6 +56,7 @@
     "stdexcept": "cpp",
     "cstring": "cpp",
     "queue": "cpp",
-    "hrtim.h": "c"
+    "hrtim.h": "c",
+    "cinttypes": "cpp"
   }
 }

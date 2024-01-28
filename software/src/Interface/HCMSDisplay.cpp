@@ -1,20 +1,14 @@
 #include "HCMSDisplay.h"
 
-#include <stdarg.h>
-#include <stdio.h>
-
 //constructor Init
 void HCMSDisplay::Init( const uint8_t brightness_percent, 
     const uint8_t peak_current_percent, 
     const bool sleep_mode) {
-    RESET_L();
 	CE_H();
 	RS_L();
 	CLK_H();
-	RESET_H();
 
-	CtrlRegLoad( 0b10000001 );
-
+	CtrlRegLoad( 0b1000001 );
 	CtrlRegSet( brightness_percent, peak_current_percent, sleep_mode );
 }
 
@@ -46,14 +40,15 @@ void HCMSDisplay::CtrlRegLoad( uint8_t ctrl_reg ) {
 	RS_L();
 }
 
-void HCMSDisplay::DataLoad( char *ch_p ) {
+void HCMSDisplay::DataLoad( const std::string& str ) {
     CLK_H();
     CE_L();
     for( int16_t i = 0 ; i < m_section ; i++ )
 	{
+        char str_temp = str[i];
         for( int16_t j = 4 ; j >= 0 ; j-- ) {
             CLK_L();
-            uint8_t data = FontData7x5[*ch_p][j];
+            uint8_t data = FontData7x5[str_temp][j];
             CLK_H();
         
             for( int16_t k = 0 ; k < 7 ; k++) {
@@ -64,7 +59,6 @@ void HCMSDisplay::DataLoad( char *ch_p ) {
                 data >>= 1;
             }
         }
-        ch_p++;
     }
     CE_H();
     CLK_L();
@@ -99,17 +93,21 @@ void HCMSDisplay::CtrlRegSet(
     else if(peak_current_percent < 100);  //result |= 0b00000000;   // 9.3mA
     else if(peak_current_percent == 100)    result |= 0b00110000;   // 12.8mA
 
+    m_reg = result;
     CtrlRegLoad(result);
 }
 
-void HCMSDisplay::Print( const char *pchar , ... ) {
-    char buf[ 16 ] = { 0 , };
-	
-    va_list va_ptr;
-	
-    va_start( va_ptr , pchar );	 
-    vsprintf( buf , pchar , va_ptr );
-    va_end( va_ptr );
-	
-    DataLoad( buf );
+void HCMSDisplay::Print( const std::string& text ) {
+    DataLoad( text );
+}
+
+void HCMSDisplay::Print( const int data ) {
+    std::string str = std::to_string(data);
+
+    int16_t paddingSize = 4 - str.length();
+    if (paddingSize > 0) {
+        str.insert(0, paddingSize, '0');
+    }
+
+    DataLoad(str);
 }

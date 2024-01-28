@@ -57,8 +57,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define Flash_CE_Pin GPIO_PIN_15
-#define Flash_CE_GPIO_Port GPIOA
+#define HCMS_CE_Pin GPIO_PIN_14
+#define HCMS_CE_GPIO_Port GPIOC
+#define HCMS_CK_Pin GPIO_PIN_15
+#define HCMS_CK_GPIO_Port GPIOC
+#define HCMS_RS_Pin GPIO_PIN_1
+#define HCMS_RS_GPIO_Port GPIOF
+#define HCMS_DA_Pin GPIO_PIN_10
+#define HCMS_DA_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

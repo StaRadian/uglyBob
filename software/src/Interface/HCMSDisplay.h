@@ -1,26 +1,26 @@
-#ifndef HCMSDISPLAY_H_
-#define HCMSDISPLAY_H_
+#pragma once
 
 #include "stm32g4xx_hal.h"
+#include <string>
 
 class HCMSDisplay {
 private:
-    const uint16_t m_CLK_pin, m_DA_pin, m_RS_pin, m_CE_pin, m_RESET_pin;
-    GPIO_TypeDef *m_CLK_base, *m_DA_base, *m_RS_base, *m_CE_base, *m_RESET_base;
+    const uint16_t m_CLK_pin, m_DA_pin, m_RS_pin, m_CE_pin;
+    GPIO_TypeDef *m_CLK_base, *m_DA_base, *m_RS_base, *m_CE_base;
     const uint8_t m_section;
     uint8_t m_section_cnt = 0;
+    uint8_t m_reg = 0b00001100;
 
     void Init(const uint8_t brightness_percent, 
         const uint8_t peak_current_percent, 
         const bool sleep_mode);
     void CtrlRegLoad( uint8_t ctrl_reg );
-    void DataLoad( char *ch );
+    void DataLoad( const std::string& str );
 public:
     HCMSDisplay(GPIO_TypeDef* _CLK_base, const uint32_t _CLK_pin, 
                 GPIO_TypeDef* _DA_base, const uint32_t _DA_pin, 
                 GPIO_TypeDef* _RS_base, const uint32_t _RS_pin, 
-                GPIO_TypeDef* _CE_base, const uint32_t _CE_pin, 
-                GPIO_TypeDef* _RESET_base, const uint32_t _RESET_pin,
+                GPIO_TypeDef* _CE_base, const uint32_t _CE_pin,
                 const uint8_t section = 8,
                 const uint8_t brightness_percent = 60, 
                 const uint8_t peak_current_percent = 73, 
@@ -29,8 +29,7 @@ public:
           m_DA_base(_DA_base), m_DA_pin(_DA_pin),
           m_RS_base(_RS_base), m_RS_pin(_RS_pin),
           m_CE_base(_CE_base), m_CE_pin(_CE_pin),
-          m_section(section),
-          m_RESET_base(_RESET_base), m_RESET_pin(_RESET_pin){
+          m_section(section) {
             Init( brightness_percent, peak_current_percent, sleep_mode );
           }
     // brightness_percent 0~100%
@@ -39,8 +38,20 @@ public:
         const uint8_t brightness_percent = 100,
         const uint8_t peak_current_percent = 73, 
         const bool sleep_mode = false );
+
+    void Sleep() {
+        m_reg &= 0b10111111;
+        CtrlRegLoad(m_reg);
+    }
+
+    void WakeUp() {
+        m_reg |= 0b01000000;
+        CtrlRegLoad(m_reg);
+    }
     
-    void Print( const char *pchar , ... );
+    void Print( const std::string& text );
+    void Print( const int data );
+    void Print( const double data );
 
 private:
 
@@ -48,13 +59,11 @@ private:
     void DA_H() { m_DA_base->BSRR = (uint32_t)m_DA_pin; }
     void RS_H() { m_RS_base->BSRR = (uint32_t)m_RS_pin; }
     void CE_H() { m_CE_base->BSRR = (uint32_t)m_CE_pin; }
-    void RESET_H() { m_RESET_base->BSRR = (uint32_t)m_RESET_pin; }
 
     void CLK_L() { m_CLK_base->BRR = (uint32_t)m_CLK_pin; }
     void DA_L() { m_DA_base->BRR = (uint32_t)m_DA_pin; }
     void RS_L() { m_RS_base->BRR = (uint32_t)m_RS_pin; }
     void CE_L() { m_CE_base->BRR = (uint32_t)m_CE_pin; }
-    void RESET_L() { m_RESET_base->BRR = (uint32_t)m_RESET_pin; }
 
     const uint8_t FontData7x5[ 0x80 ][ 5 ] = {	
         {0x00,0x00,0x00,0x00,0x00},		// 0   NUL
@@ -186,7 +195,4 @@ private:
         {0x08,0x04,0x04,0x08,0x04},		//	7E  ~    
         {0x00,0x00,0x00,0x00,0x00},		//	7F
     };
-
 };
-
-#endif /* HCMSDISPLAY_H_ */
