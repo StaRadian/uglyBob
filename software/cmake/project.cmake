@@ -71,6 +71,9 @@ target_link_options(
 
 target_sources(
     ${TARGET_NAME} PRIVATE
+    "src/Control/Motor.cpp"
+    "src/Control/MotorControl.cpp"
+    "src/Control/Move.cpp"
     "src/Core/Device.cpp"
     "src/Core/IRQHandler.cpp"
     "src/Core/Main.cpp"

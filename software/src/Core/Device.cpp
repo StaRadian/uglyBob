@@ -4,7 +4,12 @@ namespace Device {
     
     Encoder* rEncoder = nullptr;
     Encoder* lEncoder = nullptr;
+
+    IRSensor* sensor = nullptr;
+
+    Move* motor = nullptr;
+
     HCMSDisplay* display = nullptr;
 
-    int value = 0;
+    uint32_t irq_count = 0;
 }

@@ -106,7 +106,7 @@ void HCMSDisplay::Print( const int data ) {
 
     int16_t paddingSize = 4 - str.length();
     if (paddingSize > 0) {
-        str.insert(0, paddingSize, '0');
+        str.insert(0, paddingSize, ' ');
     }
 
     DataLoad(str);

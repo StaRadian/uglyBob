@@ -5,9 +5,14 @@
 void HAL_HRTIM_RepetitionEventCallback(HRTIM_HandleTypeDef * hhrtim, uint32_t TimerIdx) {
     if (TimerIdx == HRTIM_TIMERINDEX_MASTER)
     {
+        Device::sensor -> Update();
+
         Device::rEncoder -> Update();
         Device::lEncoder -> Update();
-        Device::value++;
+
+        Device::motor -> Update();
+
+        Device::irq_count++;
     }
 }
 
